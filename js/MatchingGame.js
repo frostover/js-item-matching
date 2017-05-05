@@ -15,6 +15,7 @@ var MatchingGame = {
 	maxColumns: 4,
 	container: '#matchingGame',
 	debug: true,
+	separated: true,
 	/* Edit above this */
 	columns	: 0,
 	rows	: 0,
@@ -31,7 +32,12 @@ var MatchingGame = {
 	*/
 	init: function(selections) {
 		this.initClickHandler();
-		this.createCards(selections).shuffleCards();
+		this.createCards(selections);
+
+		if(this.separated == false) {
+			this.cards = this.shuffleCards(this.cards);
+		}
+
 		return this;
 	},
 
@@ -56,12 +62,30 @@ var MatchingGame = {
 		}
 
 		//Create pairs of cards using the selection options
-		while(count < selections.length) {
-			var card1 = new Card(count, selections[count].value1, selections[count]),
-				card2 = new Card(count, selections[count].value2, selections[count]);
+		if(this.separated) {
+			var values1 = [], values2 = [];
 
-			this.cards.push(card1, card2);
-			count++;
+			while(count < selections.length) {
+				var card1 = new Card(count, selections[count].value1, selections[count]),
+					card2 = new Card(count, selections[count].value2, selections[count]);
+
+				values1.push(card1);
+				values2.push(card2);
+				count++;
+			}
+
+			values1 = this.shuffleCards(values1);
+			values2 = this.shuffleCards(values2);
+
+			this.cards = values1.concat(values2);
+		} else {
+			while(count < selections.length) {
+				var card1 = new Card(count, selections[count].value1, selections[count]),
+					card2 = new Card(count, selections[count].value2, selections[count]);
+
+				this.cards.push(card1, card2);
+				count++;
+			}
 		}
 
 		//Set the column and row count
@@ -75,17 +99,17 @@ var MatchingGame = {
 
 	/**
 	* 	Shuffle cards in a random order
-	*	@returns Reference to self
+	*	@returns Shuffled array
 	*/
-	shuffleCards: function() {
-		for (var i = this.cards.length - 1; i > 0; i--) {
+	shuffleCards: function(array) {
+		for (var i = array.length - 1; i > 0; i--) {
 	        var j = Math.floor(Math.random() * (i + 1));
-	        var temp = this.cards[i];
-	        this.cards[i] = this.cards[j];
-	        this.cards[j] = temp;
+	        var temp = array[i];
+	        array[i] = array[j];
+	        array[j] = temp;
     	}
 
-		return this;
+		return array;
 	},
 
 	/**
