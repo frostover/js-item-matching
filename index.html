@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JS Card Matching</title>
+
+	<!-- jQuery (required) -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<script type="text/javascript" src="./js/MatchingGame.js"></script>
+</head>
+<body>
+
+	<h1 class="heading">JS Card Matching</h1>
+
+	<div id="matchingGame">
+
+	</div>
+
+	<script type="text/javascript">
+			var items = [
+				new Selection('Dog', 'perro'),
+				new Selection('Cat', 'gato'),
+				new Selection('Bird', 'pájaro'),
+				new Selection('Horse', 'caballo'),
+				new Selection('Giraffe', 'jirafa'),
+				new Selection('Lion', 'león'),
+				new Selection('Monkey', 'mono'),
+				new Selection('Cow', 'vaca'),
+				new Selection('Sheep', 'oveja'),
+				new Selection('Chicken', 'pollo'),
+				new Selection('Eagle', 'águila')
+			];
+
+			var match = MatchingGame
+				.init(items)
+				.render();
+
+			$(match).on('matchFailed', function(item1, item2) {
+				console.log('failed');
+			});
+
+			$(match).on('matchSuccess', function(item1, item2) {
+				console.log('success');
+			});
+
+			$(match).on('matchComplete', function(incorrect, total) {
+				console.log('game over');
+			});
+	</script>
+
+</body>
+</html>

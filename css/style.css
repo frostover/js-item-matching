@@ -1,0 +1,52 @@
+html, body {
+	margin: 0; padding: 0;
+	font-family: Nunito, "Hiragino Sans W4", Helvetica, sans-serif;
+	font-size: 20px;
+}
+
+body {
+	background-color: #263237;
+}
+
+.heading {
+	color: #eff3f4;
+	text-align: center;
+}
+
+#matching_game_list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+.matching-card-item {
+	color: #eff3f4;
+	display: inline-block;
+	text-align: center;
+	margin-bottom: 12px;
+}
+
+.matching-card-content {
+	padding: 9px 6px;
+	width: 150px;
+	height: 50px;
+	margin: 0 auto;
+	border: 1px solid #eff3f4;
+	border-radius: 3px;
+}
+
+.matching-card-item:hover {
+	cursor: pointer;
+}
+
+.matching-card-item.selected .matching-card-content {
+	background-color: #009ddc;
+	border-color: #0781b2;
+}
+
+.matching-card-item.correct .matching-card-content {
+	background-color: #31d843;
+	border-color: #14b925;
+}
