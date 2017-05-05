@@ -89,7 +89,7 @@ var MatchingGame = {
 	},
 
 	/**
-	* 	Initlize the click handler for list items
+	* 	Initialize the click handler for list items
 	*	@returns Reference to self
 	*/
 	initClickHandler: function() {
